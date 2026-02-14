@@ -1,4 +1,5 @@
 #include "headers.h"
+//./a.out  192.168.0.10 3000
 int main(int argc,char *argv[]){
     if(argc<2){
         puts("Input @cmdline:server.exe server portNo");

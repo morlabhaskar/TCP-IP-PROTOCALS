@@ -1,7 +1,8 @@
 #include"headers.h"
+//./a.out 3000 192.168.0.10
 int main(int argc,char *argv[]){
     if(argc<3){
-        puts("input @cmdline : client.exe server portNo serverIP");
+        puts("input @cmdline : client.exe portNo serverIP");
         return 0;
     }
     puts("creating client socket...");
