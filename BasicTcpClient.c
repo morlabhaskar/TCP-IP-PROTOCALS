@@ -1,5 +1,14 @@
+/*struct sockaddr_in {
+    sa_family_t     sin_family;     // AF_INET 
+    in_port_t       sin_port;       // Port number 
+    struct in_addr  sin_addr;       // IPv4 address 
+};
+struct in_addr {
+    in_addr_t s_addr;
+};
+*/
 #include"headers.h"
-//./a.out 3000 192.168.0.10
+//./a.out 3000 127.0.0.1 
 int main(int argc,char *argv[]){
     if(argc<3){
         puts("input @cmdline : client.exe portNo serverIP");
@@ -18,8 +27,8 @@ int main(int argc,char *argv[]){
     struct sockaddr_in addr;
     int len = sizeof(addr);
     addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = inet_addr(argv[2]);
     addr.sin_port = htons(atoi(argv[1]));
+    addr.sin_addr.s_addr = inet_addr(argv[2]);
     if(connect(fd,(struct sockaddr *)&addr,len)<0){
         perror("connect");
         return 0;

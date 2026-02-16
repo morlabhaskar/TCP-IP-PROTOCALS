@@ -1,8 +1,8 @@
 #include "headers.h"
-//./a.out  192.168.0.10 3000
+//./a.out  3000  
 int main(int argc,char *argv[]){
     if(argc<2){
-        puts("Input @cmdline:server.exe server portNo");
+        puts("Input @cmdline:server.exe portNo");
         return 0;
     }
     puts("Creating Server Socket...\n");
@@ -17,9 +17,9 @@ int main(int argc,char *argv[]){
     puts("Associating Server Socket file with IP & PortNo");
     struct sockaddr_in saddr;
     int slen = sizeof(saddr);
-    saddr.sin_family = AF_INET;
-    saddr.sin_addr.s_addr = INADDR_ANY;
+    saddr.sin_family = AF_INET;//Specifies IPv4 addressing
     saddr.sin_port = htons(atoi(argv[1]));
+    saddr.sin_addr.s_addr = INADDR_ANY;//Server accepts connections on any local IP ,Works for: (127.0.0.1) (192.168.x.x)
     if(bind(sfd,(const struct sockaddr *)&saddr,slen)<0){
         perror("bind");
         return 0;
@@ -32,7 +32,7 @@ int main(int argc,char *argv[]){
         return 0;
     }
     puts("Connection queue created");
-    puts("waiting passively for connection for any client");
+    puts("waiting passively connection for any client");
     struct sockaddr_in caddr;
     int clen=sizeof(caddr),cfd;
     cfd=accept(sfd,(struct sockaddr *)&caddr,&clen);
